@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ToDoApp.Models;
 
 namespace ToDoApp.Services
@@ -35,7 +32,7 @@ namespace ToDoApp.Services
       }
     }
 
-    public void SaveData(BindingList<ToDoModel> toDoDataList)
+    public void SaveData(object toDoDataList)
     {
       using (StreamWriter writer = File.CreateText(PATH))
       {

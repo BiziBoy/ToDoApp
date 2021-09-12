@@ -1,18 +1,39 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace ToDoApp.Models
 {
   class ToDoModel : INotifyPropertyChanged
   {
     public DateTime CreationDate { get; set; } = DateTime.Now;
-    public DateTime DeadLine { get; set; } = DateTime.Today;
+    private string _deadLine;
     private bool _isDone;
     private string _text;
+
+    public void Error()
+    {
+      MessageBox.Show("error");
+    }
+
+    public bool ChekDeadLine(string date)
+    {
+      if (date != null)
+      {
+        if (date?.Length < 1 || date?.Length > 8)
+        {
+          MessageBox.Show("Повторите ввод.");
+          return false;
+        }
+        else
+          return true;
+      }
+      else
+      {
+        MessageBox.Show("Повторите ввод.");
+        return false;
+      }
+    }
 
     public bool IsDone
     {
@@ -38,6 +59,30 @@ namespace ToDoApp.Models
         }
         _text = value;
         OnPropertyChange("Text");
+      }
+    }
+
+    public string DeadLine
+    {
+      get { return _deadLine; }
+      set
+      {
+        //if (_deadLine == value)
+        //{
+        //  return;
+        //}
+        //_deadLine = value;
+        //OnPropertyChange("_deadLine");
+        MessageBox.Show(value);
+        if (ChekDeadLine(value))
+        {
+          if (_deadLine == value)
+          {
+            return;
+          }
+          _deadLine = value;
+          OnPropertyChange("_deadLine");
+        }
       }
     }
 

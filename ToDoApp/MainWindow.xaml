@@ -9,8 +9,8 @@
     <Grid>
         <DataGrid x:Name="dgToDoList" FontSize="16" FontWeight="Bold" Margin="5" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path = CreationDate}" IsReadOnly="True" Header="CreationDate" Width="180"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path = DeadLine}" IsReadOnly="False" Header="DeadLine" Width="180"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path = CreationDate}" IsReadOnly="True" Header="CreationDate" Width="160"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path = DeadLine}" IsReadOnly="False" Header="DeadLine" Width="160"></DataGridTextColumn>
                 <DataGridCheckBoxColumn Binding="{Binding Path = IsDone, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Header="Done" Width="50"></DataGridCheckBoxColumn>
                 <DataGridTextColumn Binding="{Binding Path = Text}" IsReadOnly="False" Header="Task" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>

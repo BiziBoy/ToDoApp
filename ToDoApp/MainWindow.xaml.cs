@@ -1,17 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.ComponentModel;
 using ToDoApp.Models;
 using ToDoApp.Services;
@@ -23,7 +11,7 @@ namespace ToDoApp
   /// </summary>
   public partial class MainWindow : Window
   {
-    private readonly string PATH = $""
+    private readonly string PATH = $"{Environment.CurrentDirectory}\\toDoDataList.json";
     private FileIOServices _fileIOServices;
 
     private BindingList<ToDoModel> _toDoDateList;   
@@ -35,12 +23,17 @@ namespace ToDoApp
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
-      _fileIOServices = new FileIOServices();
-      _toDoDateList = new BindingList<ToDoModel>()
+      _fileIOServices = new FileIOServices(PATH);
+      try
       {
-        new ToDoModel(){Text = "Texxt"},
-        new ToDoModel() { Text = "Terfgbh"}
-      };
+        _toDoDateList = _fileIOServices.LoadData();
+      }
+      catch (Exception ex) 
+      {
+        MessageBox.Show(ex.Message);
+        Close();
+      }
+      
       dgToDoList.ItemsSource = _toDoDateList;
       _toDoDateList.ListChanged += _toDoDateList_ListChanged;
     }
@@ -49,7 +42,15 @@ namespace ToDoApp
     {
       if (e.ListChangedType == ListChangedType.ItemChanged || e.ListChangedType == ListChangedType.ItemAdded || e.ListChangedType == ListChangedType.ItemDeleted)
       {
-
+        try
+        {
+          _fileIOServices.SaveData(sender);
+        }
+        catch (Exception ex)
+        {
+          MessageBox.Show(ex.Message);
+          Close();
+        }
       }
       
     }
