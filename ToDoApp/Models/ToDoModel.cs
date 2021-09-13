@@ -11,28 +11,29 @@ namespace ToDoApp.Models
     private bool _isDone;
     private string _text;
 
-    public void Error()
-    {
-      MessageBox.Show("error");
-    }
-
     public bool ChekDeadLine(string date)
     {
       if (date != null)
       {
-        if (date?.Length < 1 || date?.Length > 8)
+        if (date.Length < 8)
+        {
+          for (int i = 0; i < date?.Length; i++)
+          {
+            if ((date[i] > 'a' && date[i] < 'z') || (date[i] > 'A' && date[i] < 'Z') || (date[i] > 'а' && date[i] < 'я') || (date[i] > 'А' && date[i] < 'Я'))
+            {
+              MessageBox.Show("Повторите ввод.");
+              return false;
+            }
+          }
+          return true;
+        }
+        else
         {
           MessageBox.Show("Повторите ввод.");
           return false;
         }
-        else
-          return true;
       }
-      else
-      {
-        MessageBox.Show("Повторите ввод.");
-        return false;
-      }
+      else return true;
     }
 
     public bool IsDone
@@ -73,7 +74,6 @@ namespace ToDoApp.Models
         //}
         //_deadLine = value;
         //OnPropertyChange("_deadLine");
-        MessageBox.Show(value);
         if (ChekDeadLine(value))
         {
           if (_deadLine == value)
