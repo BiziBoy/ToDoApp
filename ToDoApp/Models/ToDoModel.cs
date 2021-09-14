@@ -16,7 +16,7 @@ namespace ToDoApp.Models
     {
       if (date != null)
       {
-        if (date.Length < 8)
+        if (date.Length < 9)
         {
           for (int i = 0; i < date?.Length; i++)
           {
@@ -70,12 +70,6 @@ namespace ToDoApp.Models
       get { return _deadLine; }
       set
       {
-        //if (_deadLine == value)
-        //{
-        //  return;
-        //}
-        //_deadLine = value;
-        //OnPropertyChange("_deadLine");
         if (ChekDeadLine(value))
         {
           if (_deadLine == value)
