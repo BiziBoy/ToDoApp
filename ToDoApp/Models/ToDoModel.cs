@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace ToDoApp.Models
 {
@@ -11,7 +12,7 @@ namespace ToDoApp.Models
     private bool _isDone;
     private string _text;
 
-    public bool ChekDeadLine(string date)
+    private bool ChekDeadLine(string date)
     {
       if (date != null)
       {
@@ -35,6 +36,7 @@ namespace ToDoApp.Models
       }
       else return true;
     }
+
 
     public bool IsDone
     {
